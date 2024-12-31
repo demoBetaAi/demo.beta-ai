@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beta AI</title>
+    <style>
+        /* Common Style */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            color: #ffffff;
+            background: linear-gradient(135deg, #121212, #1a1a40);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: #282c34;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #6c63ff;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #ffffff;
+            margin: 0 15px;
+            font-size: 1em;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #6c63ff;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #0d0d2a, #1a1a40);
+            box-shadow: inset 0 -100px 100px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        .hero .beta-logo {
+            font-size: 6em;
+            color: #6c63ff;
+            margin: 20px 0;
+            font-family: "Georgia", serif;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            margin: 20px 0;
+            color: #cccccc;
+        }
+
+        .hero button {
+            padding: 15px 30px;
+            background: #6c63ff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            color: #ffffff;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .hero button:hover {
+            background: #4b47b6;
+        }
+
+        /* Chat Section */
+        .chat-section {
+            padding: 50px 20px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .chat-box {
+            background: #1f1f1f;
+            border-radius: 10px;
+            padding: 20px;
+            height: 400px;
+            overflow-y: auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .input-area {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .input-area input {
+            flex: 1;
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+            background: #292929;
+            color: #ffffff;
+        }
+
+        .input-area button {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            background: #6c63ff;
+            color: #ffffff;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .input-area button:hover {
+            background: #4b47b6;
+        }
+
+        footer {
+            background: #282c34;
+            padding: 20px;
+            text-align: center;
+            color: #6c63ff;
+            margin-top: 50px;
+        }
+
+        footer a {
+            color: #6c63ff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #4b47b6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">Beta AI</div>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#chat">Chat</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="beta-logo">β</div>
+        <h1>Welcome to Beta AI</h1>
+        <p>The simplest and most interactive AI chat experience</p>
+        <button onclick="document.getElementById('userInput').focus()">Start Asking</button>
+    </div>
+
+    <!-- Chat Section -->
+    <section id="chat" class="chat-section">
+        <div class="chat-box" id="messages">
+            <!-- Chat messages will appear here -->
+        </div>
+        <div class="input-area">
+            <input type="text" id="userInput" placeholder="Ask Beta AI something...">
+            <button id="sendBtn">Send</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        © 2024 Beta AI. Designed with <a href="#about">passion</a>.
+    </footer>
+
+    <script>
+        const messagesDiv = document.getElementById("messages");
+        const userInput = document.getElementById("userInput");
+        const sendBtn = document.getElementById("sendBtn");
+
+        async function sendMessage() {
+            const userMessage = userInput.value.trim();
+            if (!userMessage) return;
+
+            // Add user message
+            addMessage("You", userMessage);
+            userInput.value = "";
+
+            // Simulate AI response
+            setTimeout(() => {
+                addMessage("Beta AI", `"Hi! This is a demo response from Beta AI."`);
+            }, 1000);
+        }
+
+        function addMessage(sender, text) {
+            const message = document.createElement("div");
+            message.innerHTML = `<strong>${sender}:</strong> ${text}`;
+            message.style.margin = "10px 0";
+            message.style.color = sender === "You" ? "#6c63ff" : "#ffffff";
+            messagesDiv.appendChild(message);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        sendBtn.addEventListener("click", sendMessage);
+        userInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") sendMessage();
+        });
+    </script>
+</body>
+</html>
